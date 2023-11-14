@@ -1,0 +1,36 @@
+{
+  "p": "ordlotte",
+  "op": "draw",
+  "blockheight": 155,
+  "algorithm": "345464313834e4dcf949557970a7285250278d15f219d9a074bdf996d42f6973i0",
+  "host": "",
+  "prize": [
+    "eaa910d4029c2aa4ae52d667315ce8ac1b7f5119ec415a91efd8da57e861c00fi0"
+  ],
+  "wallets": [
+    "bc1prsgn3mjpu24e4r494shxcvggun2pzq5d06rq97sqq4h7lqejdj4qqhujae",
+    "bc1q5k6s83q64kp5yrayk6zwh3hnrg4kp80z9tf80k",
+    "bc1qds28csqtvkcrcw0htxfa7ct8hzcgrvl9dkp9f9",
+    "bc1pj6crdmcleu8m23nfpv9hc5q27mdu42czjlwt422a20c6c92npm2sw53z55",
+    "bc1qv2w75st9xpdd2083h839s8ung7wxglv3a7nrd2",
+    "bc1punsktksstjt64zku56xsp52k8zue32ejxpdnzvjjrt8rh2hyynws3gkmc2",
+    "bc1pl9r4ahj6hc2qfuj66x8prlxzvzxtsmk5kjre4mfe20m94uws3g6q0rgx0l",
+    "bc1pnww2d9sms643h4l4md9ufpx47n88sg9s8ul2nvw6yydp5446dl9qd6exws",
+    "bc1q8lgqnj5z7vwqadj3fknefw6mxsfcnlgsxhvkk2",
+    "bc1pek6kayzu0awcrp7nfvrdu8824udek5jp6j6ulsctfrh55k67xjtskafrw7",
+    "bc1pxf40njk8mhxtm852sg7kxyu7m76and8t637snvkx9vay4rm4905qmw0frk",
+    "bc1pqguuyxl5m229usnme6nhaurza6ampn3tuxnv4lexgtge5hskyhsqekfd3z",
+    "bc1qv28tx26te8k9x2mnv6l0tmedqmld7a54e0wnzf",
+    "bc1qkt2e8wju6ynq9sqmyw5c6dcygam0ldzkqufy4h",
+    "bc1qqmzwexmn8q2q74gakjyd9w88maj7aqhdlhnu6v",
+    "bc1q6k2j04m76cc894lvsw2j7wj544280rwulkyy4s",
+    "bc1qa0dg8pyvh7u0kva46fwq45wfnhzr68ytcjyw76",
+    "bc1qvanwfrwj5xak84axzzrpe8ndhrtfsylu8mrkq4",
+    "bc1ppzluzytywqnqjhk3agxk2w8e6235ndz2fy3leyrm5ln3lx6u8duq02rnl2",
+    "bc1p7sdwy35nu5vvj5mn43p9cl3lqt72ju2efxaxjwpsta60gu8x5vcqpshr9n",
+    "bc1p2j9dd984p5g8ajhvgaw78vupwxkuqlcptytwkjtxwcxxcvrah5us79t3u6",
+    "bc1q7x497xnt2pw2g4z2fzkrywksgjxl4550kk3768",
+    "bc1qjdzce9azjaw3xfepxrjxg9rvhfr2gfjtpxxkt5",
+    "bc1p96n3j8drw7mf6dtfh944d69nvfpjxttw7erae3e4ygv24ypjxg6s7ecvva"
+  ]
+}

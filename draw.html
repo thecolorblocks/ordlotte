@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ordinal Lottery Checker</title>
+  <link rel="stylesheet" href="/content/2d8db4d11f22b6760d11857be3eab9420bf8dbd3394d9009553b9729991dd823i0">
+  <style>
+    :root {
+      --primary-400: #ffa21f;
+      --primary: #ff9500;
+      --primary-600: #f58f00;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>
+        Ordinal Lottery Checker
+      </h1>
+    </header>
+    <section>
+      <input type="text" placeholder="Draw Inscription ID" id="draw" />
+    </section>
+    <section>
+      <button id="check">Check</button>
+    </section>
+    <section>
+      <h6>
+        Host:
+      </h6>
+      <p id="host"></p>
+    </section>
+    <section>
+      <h6>
+        Prize:
+      </h6>
+      <p id="prizetext"></p>
+    </section>
+    <section>
+      <h6>
+        Winner:
+      </h6>
+      <p id="winner"></p>
+    </section>
+    <section>
+      <h6>
+        Reveal Block Height:
+      </h6>
+      <p id="blockheight"></p>
+    </section>
+    <section>
+      <h6>
+        Algorithm:
+      </h6>
+      <p id="algorithm"></p>
+    </section>
+    <footer>
+      <p>Created by thecolorblocks.sats</p>
+      <p><small>Powered by <a>the ordlotte protocol</a></small></p>
+    </footer>
+  </main>
+  <script>
+    const check = document.getElementById('check')
+    check.addEventListener('click', async () => {
+      const drawInsID = document.getElementById('draw').value
+      const prizeText = document.getElementById('prizetext')
+      const hostText = document.getElementById('host')
+      const blockHeightText = document.getElementById('blockheight')
+      const algorithm = document.getElementById('algorithm')
+      const response = await window.fetch('/content/' + drawInsID)
+      const opDraw = await JSON.parse(await response.text())
+      if (opDraw.p !== 'ordlotte' || opDraw.op !== 'draw') throw Error('Invalid Ordlotte Draw Operation')
+      const algo = await import('/content/' + opDraw.algorithm)
+      const winner = await algo.default.draw(opDraw.blockheight, opDraw.wallets)
+      const winnerDisplay = document.getElementById('winner')
+      prizeText.textContent = opDraw.prize
+      if (winner) {
+        winnerDisplay.textContent = winner
+      } else {
+        winnerDisplay.textContent = 'No winner yet. Reveal at block height ' + blockheight
+      }
+    }, false)
+  </script>
+</body>
+</html>
