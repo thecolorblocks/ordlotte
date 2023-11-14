@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ordinal Lottery Checker</title>
-  <link rel="stylesheet" href="/content/2d8db4d11f22b6760d11857be3eab9420bf8dbd3394d9009553b9729991dd823i0">
+  <link rel="stylesheet" href="/content/3e5f311d63462a55b1110fb197f6f2b1555dbe85da67fc52fba8801eea2782f2i0">
   <style>
     :root {
       --primary-400: #ffa21f;
       --primary: #ff9500;
       --primary-600: #f58f00;
+    }
+    .winner {
+      color: var(--primary);
     }
   </style>
 </head>
@@ -36,7 +39,7 @@
       <h6>
         Prize:
       </h6>
-      <p id="prizetext"></p>
+      <p id="prize"></p>
     </section>
     <section>
       <h6>
@@ -63,23 +66,31 @@
   </main>
   <script>
     const check = document.getElementById('check')
+    const ui = {
+      host: document.getElementById('host'),
+      prize: document.getElementById('prize'),
+      winner: document.getElementById('winner'),
+      blockheight: document.getElementById('blockheight'),
+      algorithm: document.getElementById('algorithm'),
+    }
     check.addEventListener('click', async () => {
       const drawInsID = document.getElementById('draw').value
-      const prizeText = document.getElementById('prizetext')
-      const hostText = document.getElementById('host')
-      const blockHeightText = document.getElementById('blockheight')
-      const algorithm = document.getElementById('algorithm')
-      const response = await window.fetch('/content/' + drawInsID)
-      const opDraw = await JSON.parse(await response.text())
+      const currentBH = await (await window.fetch('/blockheight')).text()
+      const opDraw = await JSON.parse(await (await window.fetch('/content/' + drawInsID)).text())
       if (opDraw.p !== 'ordlotte' || opDraw.op !== 'draw') throw Error('Invalid Ordlotte Draw Operation')
       const algo = await import('/content/' + opDraw.algorithm)
       const winner = await algo.default.draw(opDraw.blockheight, opDraw.wallets)
-      const winnerDisplay = document.getElementById('winner')
-      prizeText.textContent = opDraw.prize
+      // Update UI
+      ui.host.textContent = opDraw.host
+      ui.prize.innerHTML = opDraw.prize.join('<br>')
+      ui.blockheight.textContent = opDraw.blockheight
+      ui.algorithm.textContent = opDraw.algorithm
       if (winner) {
-        winnerDisplay.textContent = winner
+        ui.winner.classList.add('winner')
+        ui.winner.textContent = winner
       } else {
-        winnerDisplay.textContent = 'No winner yet. Reveal at block height ' + blockheight
+        ui.winner.classList.remove('winner')
+        ui.winner.textContent = 'No winner yet. Revealing in ' + (opDraw.blockheight - currentBH) + ' blocks.'
       }
     }, false)
   </script>
