@@ -109,3 +109,7 @@ Using the `blockheight` is culturally significant. It signifies that, at this sp
 
 `wallets` is a list of wallets, represented by addresses.
 
+#### Verify Results
+
+Once the `blockheight` is reached, you can use the `ordlotte.draw` function to verify the winner.
+
