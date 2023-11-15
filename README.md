@@ -20,7 +20,7 @@ Using future block hash to guarantee provable randomness.
 
 ## Operations
 
-To host a open and fair lottery on Ordinals, you must first **inscribe a provably fair algorithm**, written in JavaScript, that generates winners from an array of wallets.
+To host a open and fair lottery on Ordinals, you must first **inscribe a provably fair algorithm**, written in JavaScript, that generates winners from an array of wallets. Or you can use someone else's algorithm inscription.
 
 ```javascript
 const ordlotte = {
