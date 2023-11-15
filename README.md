@@ -18,6 +18,8 @@ Proofs of randomness and raffle/giveaway results are all verifiable on chain. Do
 
 Using future block hash to guarantee provable randomness. 
 
+*Bitcoin-native event* using *Bitcoin-native metrics* running on *Bitcoin-native time*.
+
 ## Operations
 
 To host a open and fair lottery on Ordinals, you must first **inscribe a provably fair algorithm**, written in JavaScript, that generates winners from an array of wallets. Or you can use someone else's algorithm inscription.
