@@ -6,7 +6,7 @@ The spirit of blockchain is the *open ledger*. It is an immutable database acces
 
 So, a lottery system that is truly fair and open aligns with the spirit of the blockchain.
 
-Ordinals emerged as a breeding ground for new protocols to emerge.
+Ordinals emerged as a breeding ground for new open protocols to emerge.
 
 Sats Names. BRC20. Bitmaps.
 
