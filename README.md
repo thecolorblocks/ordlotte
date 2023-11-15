@@ -12,6 +12,12 @@ Sats Names. BRC20. Bitmaps.
 
 This time, we introduce: **ordlotte**.
 
+## Why Ordlotte?
+
+Proofs of randomness and raffle/giveaway results are all verifiable on chain. Don't trust. Verify.
+
+Using future block hash to guarantee provable randomness. 
+
 ## Operations
 
 To host a open and fair lottery on Ordinals, you must first **inscribe a provably fair algorithm**, written in JavaScript, that generates winners from an array of wallets.
@@ -40,14 +46,6 @@ const ordlotte = {
 export default ordlotte
 ```
 
-The specific implementations can vary. It is suggested that the JavaScript inscription contains an object constant `ordlotte`, and exposes an asynchronous `draw` function, which takes two parameters: `blockheight: Integer` and `wallets: Array`.
-
-`wallets` is self-explanatory: it is an array of all participants represented by their participating wallet address. The `blockheight` parameter is needed because the algorithm, despite variations in implementations, will always fetch the block hash of that specific block height, and uses said block hash to generate the provably random winner with the block hash as input.
-
-In this example implementation, the block hash is hased, resulting in a sha-256 base16 hex string, then transcoded to base10, and obtaining the winner through modular arithmetic.
-
-The `blockheight` variable is culturally significant. It signifies that, at this specific block height, the winner will be drawn based on the randomness of the block hash of that height. This is _Bitcoin-native event_ using *Bitcoin-native metrics* running on _Bitcoin-native time_.
-
 And then, inscribe a **draw operation**.
 
 ```JSON
@@ -66,15 +64,48 @@ And then, inscribe a **draw operation**.
     "bc1q5k6s83q64kp5yrayk6zwh3hnrg4kp80z9tf80k",
     "bc1qds28csqtvkcrcw0htxfa7ct8hzcgrvl9dkp9f9",
     "bc1pj6crdmcleu8m23nfpv9hc5q27mdu42czjlwt422a20c6c92npm2sw53z55",
-    "bc1qv2w75st9xpdd2083h839s8ung7wxglv3a7nrd2",
-    "bc1punsktksstjt64zku56xsp52k8zue32ejxpdnzvjjrt8rh2hyynws3gkmc2",
-    "bc1pl9r4ahj6hc2qfuj66x8prlxzvzxtsmk5kjre4mfe20m94uws3g6q0rgx0l",
-    "bc1pnww2d9sms643h4l4md9ufpx47n88sg9s8ul2nvw6yydp5446dl9qd6exws",
-    "bc1q8lgqnj5z7vwqadj3fknefw6mxsfcnlgsxhvkk2",
-    "bc1pek6kayzu0awcrp7nfvrdu8824udek5jp6j6ulsctfrh55k67xjtskafrw7",
-    "bc1pxf40njk8mhxtm852sg7kxyu7m76and8t637snvkx9vay4rm4905qmw0frk",
-    "bc1pqguuyxl5m229usnme6nhaurza6ampn3tuxnv4lexgtge5hskyhsqekfd3z",
-    "bc1qv28tx26te8k9x2mnv6l0tmedqmld7a54e0wnzf"
+    "bc1qv2w75st9xpdd2083h839s8ung7wxglv3a7nrd2"
   ]
 }
 ```
+
+## Implementation Details
+
+#### Algorithm
+
+The specific implementations of the algorithm can vary. It is suggested that the JavaScript inscription contains an object constant `ordlotte`, and exposes an asynchronous `draw` function, which takes two parameters: `blockheight: Integer` and `wallets: Array`.
+
+```javascript
+// The object constant ordlotte
+const ordlotte = {
+  // The asynchronous draw function
+  // Take blockheight and wallets as two parameters
+  draw: async (blockheight, wallets) => {
+    // return the winner wallet(s) based on the block hash of "blockheight"
+  }
+}
+
+// For ES6 modules syntax
+export default ordlotte
+```
+
+For parameters, `wallets` is self-explanatory: it is an array of all participants represented by their participating wallet address. The `blockheight` parameter is needed because the algorithm, despite variations in implementations, will always fetch the `blockhash` of `blockheight`, and uses `blockhash` to generate the provably random winner with the block hash as input. The `blockhash` is fetched using the Ordinal recursive endpoint `/blockhash/:height`.
+
+Using the `blockheight` is culturally significant. It signifies that, at this specific block height, the winner will be drawn based on the randomness of the block hash of that height. This is _Bitcoin-native event_ using *Bitcoin-native metrics* running on _Bitcoin-native time_.
+
+#### Draw Operation
+
+`p` is protocol, which is always `ordlotte`.
+
+`op` is always `draw`, signifying a draw operation in the `ordlotte` protocol.
+
+`blockheight` is the future block height that this `draw` operation will commence. For the `draw` operation to be valid, the operation must be inscribed before `blockheight`.
+
+`algorithm` is the inscription ID of the JavaScript algorithm inscription.
+
+`host` is the host address of this draw. `host` must already own the inscription(s) listed in `prize` for this `draw` operation to be valid.
+
+`prize` is a list of prize(s), represented by inscription ID(s).
+
+`wallets` is a list of wallets, represented by addresses.
+
